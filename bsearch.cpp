@@ -6,47 +6,48 @@ using namespace std;
 
 int binarySearch(const vector<int>& number_vector, int x) {
     int left = 0, right = number_vector.size() - 1;
+    int result = -1;  // Store the index of the first occurrence
 
     while (left <= right) {
         int mid = left + (right - left) / 2;
 
         if (number_vector[mid] == x) {
-            return mid;  // Elemento encontrado, retorna o índice
+            result = mid;  // Update result to current index
+            right = mid - 1;  // Continue searching on the left for the first occurrence
         } else if (x < number_vector[mid]) {
-            right = mid - 1;  // Elimina a metade direita
+            right = mid - 1;  // Eliminate the right half
         } else {
-            left = mid + 1;  // Elimina a metade esquerda
+            left = mid + 1;  // Eliminate the left half
         }
     }
 
-    return -1;  // Elemento não encontrado
+    return result;  // Return the index of the first occurrence, or -1 if not found
 }
 
 int main() {
     int n, q;
-    scanf("%d %d", &n, &q);  // Lê os valores de n e q
+    scanf("%d %d", &n, &q);  // Read values of n and q
     int x;
 
     string linha;
     vector<int> number_vector;
 
-    cin.ignore();  // Ignora a nova linha após a leitura de n e q
-    getline(cin, linha);  // Lê a linha com os números
+    cin.ignore();  // Ignore the newline after reading n and q
+    getline(cin, linha);  // Read the line with numbers
     stringstream ss(linha);
     int numero;
     while (ss >> numero) {
-        number_vector.push_back(numero);  // Preenche o vetor com os números
+        number_vector.push_back(numero);  // Fill the vector with numbers
     }
 
-    // Para cada consulta, realiza a busca binária
+    // For each query, perform binary search
     for (int i = 0; i < q; i++) {
-        scanf("%d", &x);  // Lê o valor de x para cada consulta
-        int result = binarySearch(number_vector, x);  // Realiza a busca binária
+        scanf("%d", &x);  // Read the value of x for each query
+        int result = binarySearch(number_vector, x);  // Perform binary search
 
-        printf("%d", result);  // Imprime o índice encontrado ou -1, seguido de uma nova linha
+        printf("%d", result);  // Print the found index or -1, followed by a newline
         printf("\n");
     }
-        printf("\n");
 
     return 0;
 }
