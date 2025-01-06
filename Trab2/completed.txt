@@ -1,0 +1,5 @@
+NOtação assint. V
+Metodos da iteração V
+Metodo Mestre V
+Metodo da Infução V
+Metodo da Subst. V
